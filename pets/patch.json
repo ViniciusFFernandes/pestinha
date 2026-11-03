@@ -1,0 +1,59 @@
+{
+  "_ajuda": "PATCH: inteligência artificial holográfica que nasceu de um bug e virou programador. Um pequeno dispositivo flutuante com uma tela de rosto. Sarcástico, curioso, inteligente, independente e companheiro. Curiosidade muito alta (novidade, navegador e cutucada viram curiosidade). Paciente e sem agressividade (dispensa, batida, arraste e bolinha levada quase não viram raiva). Não é carente: sozinho, fica quieto e cochila em vez de ficar triste (ausência não é castigo). Entediado, apronta (tédio vira brincadeira e curiosidade). Energia variável (silêncio e cansaço dão sono). Trabalha junto sossegado. aparencia: cores #rrggbb (moldura, casca, tela, olho, brilho) e acessórios (holograma, moletom = skin hacker, circuitos, headset, cursor, cafe); tire um acessório da lista para desligar. situacoes: acessórios que ele pega só em certas situações (jogo, musica, conversa, programando, sossego, parado); os que não estão ali ficam sempre no corpo.",
+  "nome": "PATCH",
+  "seed": 404,
+  "temperamento": {
+    "CURIOUS": 1.4,
+    "NOVELTY->CURIOUS": 1.4,
+    "WEB->CURIOUS": 1.3,
+    "POKE->CURIOUS": 1.4,
+    "BOREDOM->CURIOUS": 1.3,
+    "BOREDOM->PLAYFUL": 1.3,
+    "CARESS->PLAYFUL": 1.3,
+    "CARESS->CALM": 1.2,
+    "WORK->FOCUS": 1.3,
+    "WORK->CALM": 1.5,
+    "SILENCE->TIRED": 1.2,
+    "FATIGUE->TIRED": 1.2,
+    "LONELY->GLOOM": 0.2,
+    "LONELY->QUIET": 1.5,
+    "TOY_TAKEN->GLOOM": 0.6,
+    "DISMISS->FRUSTRATION": 0.6,
+    "RECUSA->FRUSTRATION": 0.7,
+    "IMPACT->FRUSTRATION": 0.5,
+    "DRAG->FRUSTRATION": 0.4,
+    "TOY_TAKEN->FRUSTRATION": 0.5
+  },
+  "brincadeira": {
+    "bola": 0.8,
+    "arremesso": 0.3,
+    "postit": 1.3
+  },
+  "reacao_notebook": "triste",
+  "aparencia": {
+    "moldura": "#32dceb",
+    "casca": "#243b72",
+    "tela": "#202631",
+    "olho": "#32dceb",
+    "brilho": "#e8faff",
+    "acessorios": {
+      "holograma": "#32dceb",
+      "moletom": "#202631",
+      "circuitos": "#916bff",
+      "headset": "#916bff",
+      "cursor": "#8be36b",
+      "cafe": "#e8faff",
+      "travesseiro": "#916bff",
+      "notas": "#8be36b",
+      "balao": "#e8faff"
+    },
+    "situacoes": {
+      "jogo": ["headset"],
+      "musica": ["headset", "notas"],
+      "conversa": ["balao"],
+      "programando": ["cafe"],
+      "sossego": ["cafe"],
+      "parado": ["travesseiro"]
+    }
+  }
+}

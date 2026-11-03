@@ -63,6 +63,9 @@ from .core.protesto import Protesto
 from .log import log
 from .mind.castigo_ctl import CastigoController
 from .mind.festa import FestaController
+from .mind.figurino import Figurino
+from .ia.cliente import carregar_config
+from .ia.fala import Fala
 from .mind.mesa import MesaController, pull
 from .mind.mischief_ctl import MischiefController
 from .mind.protest_ctl import ProtestController
@@ -144,6 +147,7 @@ class PestinhaApp(SessaoMixin, InteracaoMixin, QObject):
         left, top, right, _bottom = self.bounds()
         self.pet = PetWindow(right - 220, top + 120, self.pet_state)
         self.pet.aparencia = aparencia_de(pet_def.get("aparencia"))
+        self.figurino = Figurino(self.pet.aparencia.situacoes)   # acessórios que ele pega conforme a situação
         self.pet.poked.connect(self.on_poke)
         self.pet.drag_started.connect(self.on_drag_started)
         self.pet.drag_ended.connect(lambda: self.senses.set_dragging(False))
@@ -151,6 +155,12 @@ class PestinhaApp(SessaoMixin, InteracaoMixin, QObject):
         self.pet.menu_requested.connect(self.show_pet_menu)
         self.ball_stored = False    # você guardou a bolinha pelo menu
         self.mischief = MischiefEngine(self.conteudo)
+        personalidade = self.conteudo.personalidade
+        self.fala = Fala(carregar_config(self.paths.root),
+                         personalidade.read_text(encoding="utf-8") if personalidade.exists() else "",
+                         self.pet_paths.base / "conversa.json", self.nome)
+        self.mischief.frase_ia = lambda: self.fala.frase_pronta() if self.perms["ia"] else None
+        self.janela_conversa = None
         self.mischief.dismissed.connect(self.on_dismissed)
         self.behavior = Behavior(self.pet.body, self.pet_state, self.mischief)
 
@@ -470,6 +480,11 @@ class PestinhaApp(SessaoMixin, InteracaoMixin, QObject):
         self._atualizar_mesa(now)
         self.memory.tick(now, self.prof["episode_ok"], self.prof["episode_window"])
         st.emotion = emotion
+        st.vestindo = self.figurino.tick(now, dt, self.activity, self.idle_seconds, emotion)
+        if self.fala.ocupada:
+            st.vestindo |= {"balao"}                 # digitando uma resposta para você
+        elif self.perms["ia"] and self.perms["bilhetes"]:
+            self.fala.pedir_frase(self.momento_ia(), now)   # deixa um post-it do momento pronto (tem intervalo)
         self.behavior.on_emotion(emotion, time.monotonic())
 
     def frame(self):

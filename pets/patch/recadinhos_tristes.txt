@@ -1,0 +1,11 @@
+# Bilhetes que o PATCH cola quando está triste. Um por linha. Linhas com # são ignoradas.
+# Ele é independente: tristeza dele é desânimo leve, nunca cobrança por você ter sumido.
+# Pode editar com ele rodando: ele relê o arquivo sozinho.
+hoje o compilador me odeia
+meu café esfriou e ninguém viu
+tá tudo bem. só reiniciando por dentro.
+até raposa digital tem dia de bug
+modo economia de energia: ativado
+fiquei sem bolinha. registrando no log de tristezas.
+amanhã eu me atualizo
+só preciso de um patch. irônico.

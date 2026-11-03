@@ -154,7 +154,8 @@ class PetWindow(QWidget):
         p.translate(CX + jitter_x, CY + jitter_y)
         p.rotate(self.body.angle + sway)
         blink = 0.08 if time.monotonic() < st.blink_until else 1.0
-        draw_face(p, st.shape, st.gaze, blink, st.emotion, carinho=st.feliz_fechado(), aparencia=self.aparencia)
+        draw_face(p, st.shape, st.gaze, blink, st.emotion, carinho=st.feliz_fechado(), aparencia=self.aparencia,
+                  vestindo=st.vestindo)
         p.restore()
 
         if st.emotion == "dormindo":

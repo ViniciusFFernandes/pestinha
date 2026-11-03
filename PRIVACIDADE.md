@@ -1,6 +1,7 @@
 # Privacidade do Pestinha
 
-O Pestinha roda só no seu computador. Ele não envia nada para a internet.
+O Pestinha roda só no seu computador. Ele não envia nada para a internet, a não ser que você ligue as
+**Falas com IA** (desligadas por padrão; veja abaixo).
 
 ## O que ele lê
 
@@ -38,6 +39,7 @@ De cada personagem, em `memory/pets/<pet>/` (um personagem não lê a memória d
 | `drives.json` | Energia, estimulação e carência |
 | `protest.json`, `sad_protest.json` | Insatisfação e tristeza |
 | `castigo.json` | Fugas do cantinho, rancor e receio |
+| `conversa.json` | Só com as Falas com IA: últimas mensagens da conversa e o resumo do que ele lembra de você |
 | `.migrado` | Só existe se a memória veio da versão antiga: quando migrou e o hash de cada arquivo |
 
 Quem usou uma versão antiga (arquivos soltos em `memory/`) tem a memória migrada sozinha na primeira
@@ -51,6 +53,21 @@ os arquivos antigos e avisa no ícone da bandeja.
   ainda estava na memória.
 - **Apagar todos os dados do Pestinha** apaga a pasta `memory/` inteira, com a memória de todos os personagens (pede confirmação, desliga o início com o Windows e fecha o programa). Se algum arquivo não puder ser apagado, ele avisa quais foram antes de fechar.
 - Você também pode apagar a pasta `memory/` manualmente, com o programa fechado.
+
+## Falas com IA (opcional)
+
+Desligadas por padrão. Só funcionam para personagens com `personalidade.txt` e com a chave do serviço no
+arquivo `.env` da pasta do programa (que não vai para o repositório). Ligadas, ele manda para o serviço
+configurado no `.env` (por exemplo, o Gemini do Google):
+
+- a personalidade do personagem e as regras de estilo;
+- o resumo do que ele lembra de você e as últimas mensagens da conversa;
+- a emoção dele, a **categoria** do que você está fazendo (programando, jogando, navegando...) e a hora;
+- o que você escreve na janela de conversa.
+
+Nunca vão títulos de janela, nomes de arquivo, sites ou o que está na tela. O serviço de IA tem a própria
+política de privacidade (no plano gratuito do Gemini, o Google pode usar o conteúdo para melhorar os
+modelos). **Esquecer conversas**, na janela de conversa, apaga `conversa.json`.
 
 ## Fora da pasta de dados
 

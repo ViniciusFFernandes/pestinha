@@ -1,0 +1,43 @@
+# Post-its do PATCH. Um por linha. Linhas que começam com # são ignoradas.
+# Frases curtas, sarcásticas e de vez em quando carinhosas. Nada de suporte técnico.
+# Pode editar com ele rodando: ele relê o arquivo sozinho.
+esse código está com cheiro de bug...
+vai compilar ou vai ficar olhando?
+mais um dia alimentando máquinas com código.
+acho que merecemos um café. principalmente eu.
+funcionou? hm... eu sabia. obviamente.
+estou pensando. é um processo demorado.
+já tentou desligar e ligar de novo?
+um ; a menos e o mundo acaba.
+SELECT * FROM paciencia; -- 0 rows
+esqueceu o WHERE? eu esqueci de nada.
+o legado sempre vence.
+quem escreveu isso? ah. você.
+comentário no código? que luxo.
+isso não é gambiarra. é arquitetura alternativa.
+deploy na sexta? corajoso.
+eu faria melhor. mas tô de folga.
+bebe água. raposas também precisam de manutenção.
+salvou o arquivo? só perguntando.
+console.log('ainda estou aqui')
+o jQuery mandou lembranças.
+var_dump($voce);
+o banco de dados está te observando.
+cuidado com esse JOIN.
+você não é tão ruim assim para um humano.
+hoje estamos produtivos. estou até gostando daqui.
+o que foi? sentiu minha falta?
+eu sou mais inteligente. mas você é legal.
+pausa de 5 minutos. eu autorizo.
+tá, ficou bonito. não conta pra ninguém.
+CSS: centralizei uma div. sozinho.
+!important não resolve tudo.
+funciona na minha máquina. e eu moro aqui.
+refatorar é bom. às vezes.
+isso precisa de um índice.
+o erro está entre a cadeira e o teclado. brincadeira. talvez.
+estou de olho no seu stack trace.
+não fui eu. foi o cache.
+limpa o cache. confia.
+TODO: fazer o TODO.
+ninguém lê a documentação. nem eu.

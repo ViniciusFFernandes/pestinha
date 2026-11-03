@@ -305,8 +305,8 @@ class Behavior:
             return min(walk_right - 80, max(walk_left + 80, cursor[0] + side * CURIOUS_DISTANCE))
         if self.canto:
             return left + 80 if x - left < right - x else right - 80   # cantinho mais perto
-        if self.emotion == "observando" and random.random() < 1.0 - self.tone.drive():
-            return None                         # às vezes só fica olhando mesmo
+        if self.emotion in ("observando", "pensando", "sonolento") and random.random() < 1.0 - self.tone.drive():
+            return None                         # às vezes só fica olhando (ou pensando, ou cochilando) mesmo
         vizinhos = self._lateral_neighbors(left, right)
         if vizinhos and random.random() < CROSS_SCREEN_CHANCE:
             v_left, v_right = random.choice(vizinhos)

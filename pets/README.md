@@ -15,7 +15,7 @@ Um pet são duas coisas com o mesmo nome:
 | `brincadeira` | Pesos de cada jeito de brincar: `bola` (chuta), `arremesso` (joga no cursor), `postit` (cola post-its). Peso 0 desliga. |
 | `temperamento` | Ganhos que multiplicam estímulos antes de chegarem aos interneurônios. Ex.: `"DISMISS->FRUSTRATION": 1.3` deixa o pet mais irritado quando você dispensa coisas. Os nomes estão em [docs/REDE_NEURAL.md](../docs/REDE_NEURAL.md). |
 | `reacao_notebook` | `"bravo"` ou `"triste"`: o que ele sente quando arrancam o notebook dele. |
-| `aparencia` | Opcional. Cores `#rrggbb` de `moldura`, `casca`, `tela`, `olho` e `brilho`, e `acessorios` com a cor de cada um: `{"oculos": "#f2f2f2", "gravata": "#b3261e"}`. Sem o campo, o visual original. |
+| `aparencia` | Opcional. Cores `#rrggbb` de `moldura`, `casca`, `tela`, `olho` e `brilho`, e `acessorios` com a cor de cada um: `{"oculos": "#f2f2f2", "gravata": "#b3261e"}`. Acessórios: `oculos`, `gravata`, `holograma` (corpo translúcido flutuando, com brilho e fragmentos em órbita), `moletom`, `circuitos`, `headset`, `cursor` (piscando na tela), `cafe`, `travesseiro`, `notas` e `balao`. Em `situacoes`, quais acessórios ele só pega em certas situações (`jogo`, `musica`, `conversa`, `programando`, `sossego`, `parado`), ex.: `{"jogo": ["headset"], "parado": ["travesseiro"]}`; os que não estão ali ficam sempre no corpo. Sem o campo, o visual original. |
 
 Campos com tipo errado são ignorados e ficam com o valor padrão (não derrubam o app).
 
@@ -43,6 +43,9 @@ de outro pet.
   com atenção, desesperado quando dispensam as coisas dele e quase nunca triste. O panfleto que ele atira
   (`jorge/bolinha_papel.png`) é desenhado por `ferramentas/gerar_panfleto.py`. Moldura e olhos dourados
   e gravata vermelha. Memes felizes, contentes, curiosos e bravos próprios em `jorge/memes/feliz/`, `contente/`, `curioso/` e `bravo/`; as outras emoções ainda sem memes.
+- **PATCH** (`patch.json`, `patch/`): IA holográfica que nasceu de um bug e virou programador. Sarcástico, curioso,
+  paciente e independente: sozinho, cochila em vez de ficar triste. Cartazes e post-its de programador (PHP, SQL,
+  deploy). O terminal holográfico (`patch/notebook.png`) é desenhado por `ferramentas/gerar_notebook_patch.py`.
 
 ## Criar outro pet
 

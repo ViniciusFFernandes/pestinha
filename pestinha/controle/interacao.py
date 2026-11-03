@@ -10,6 +10,9 @@ Mixin de PestinhaApp: usa os atributos criados em PestinhaApp.__init__.
 from ..log import log
 import time
 from PySide6.QtWidgets import QMenu
+from ..config import EMOTION_NAMES
+from ..ia.fala import contexto
+from ..ui.conversa import JanelaConversa
 from ..body.pet import cursor_pos
 from ..ajustes import (
     INSATISFACAO_NOTEBOOK,
@@ -127,6 +130,8 @@ class InteracaoMixin:
         item("Mostrar o notebook" if self.mesa.escondido else "Esconder o notebook",
              self.menu_alternar_notebook)
         item("Fazer uma travessura agora", self.menu_mischief, perms["travessuras"])
+        if self.fala.personalidade:
+            item(f"Conversar com {self.nome}...", self.menu_conversar, perms["ia"] and self.fala.disponivel)
         menu.addSeparator()
         item("Cantinho do castigo", lambda: self.castigo.toggle(self.bounds()))
         item("Painel de protesto", lambda: self.floats.toggle("greve"))
@@ -136,6 +141,18 @@ class InteracaoMixin:
         item("Esconder (volta pela bandeja)", self.toggle_hidden)
         item("Fechar", self.menu_close)
         menu.exec(pos)
+
+    def momento_ia(self):
+        """O contexto que vai para a IA: emoção dele, categoria do que você faz e a hora."""
+        return contexto(EMOTION_NAMES.get(self.pet_state.emotion, self.pet_state.emotion).lower(), self.activity)
+
+    def menu_conversar(self):
+        """Abre (ou traz para a frente) a janela de conversa."""
+        if self.janela_conversa is None:
+            self.janela_conversa = JanelaConversa(self.fala, self.nome, self.momento_ia)
+        self.janela_conversa.show()
+        self.janela_conversa.raise_()
+        self.janela_conversa.activateWindow()
 
     def menu_poke(self):
         """Menu: 'Cutucar' (ignora o intervalo mínimo entre cutucadas)."""

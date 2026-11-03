@@ -138,6 +138,11 @@ class ConteudoPaths:
         return self.resolver("fotos")
 
     @property
+    def personalidade(self):
+        """Como o pet fala quando a IA está ligada (opcional; sem ele, nada de IA para este pet)."""
+        return self.resolver("personalidade.txt")
+
+    @property
     def notes(self):
         """Recadinhos (post-its) de todo dia."""
         return self.resolver("recadinhos.txt")

@@ -10,7 +10,8 @@ import random
 from .paths import pet_id_valido
 from .store import read_json, read_lines, write_json
 
-EMOTIONS = ["feliz", "contente", "observando", "curioso", "bravo", "triste", "assustado", "dramatico"]
+EMOTIONS = ["feliz", "contente", "observando", "curioso", "bravo", "triste", "assustado", "dramatico",
+            "pensando", "sarcastico", "sonolento"]
 
 EMOTION_NAMES = {
     "feliz": "FELIZ",
@@ -22,6 +23,9 @@ EMOTION_NAMES = {
     "assustado": "ASSUSTADO",
     "dramatico": "DRAMÁTICO",
     "dormindo": "DORMINDO",
+    "pensando": "PENSANDO",
+    "sarcastico": "SARCÁSTICO",
+    "sonolento": "SONOLENTO",
 }
 
 IMAGE_EXT = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp"}
@@ -50,6 +54,7 @@ DEFAULT_PERMISSIONS = {
     "mostrar_emocao": False,   # só vale com modo_teste ligado
     "bolinha": True,           # a bolinha para ele brincar
     "fogos": True,             # fogo de artifício quando ele fica feliz de verdade (rede)
+    "ia": False,               # falas escritas por IA (manda contexto para o serviço do .env)
 }
 
 # (chave, rótulo, descrição) na ordem da tela inicial
@@ -80,6 +85,13 @@ PERMISSION_GROUPS = [
     ("Brincadeira", [
         ("fogos", "Fogos de artifício", "Quando ele fica muito feliz, a alegria da rede pode soltar um fogo."),
         ("bolinha", "Bolinha", "Uma bolinha para ele brincar. Se você levar para longe, ele reage (pode ficar triste, bravo ou ir atrás)."),
+    ]),
+    ("Inteligência artificial", [
+        ("ia", "Falas com IA",
+         "Só para pets com personalidade.txt e com a chave no arquivo .env. Ele conversa com você (botão "
+         "direito > Conversar) e às vezes escreve post-its na hora. Vai para o serviço de IA: a personalidade, "
+         "o resumo das conversas, a emoção dele, a categoria do que você faz (programando, jogando...) e a hora. "
+         "Nunca títulos de janela, sites ou o que está na tela."),
     ]),
     ("Teste", [
         ("modo_teste", "Modo teste", "Tempos curtos: travessuras e emoções acontecem em segundos."),

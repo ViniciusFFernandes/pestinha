@@ -1,0 +1,95 @@
+# Cartazes do PATCH, a raposa cibernética. Uma frase por linha, dentro de cada seção.
+# Sarcasmo sim, agressividade não: o protesto dele é um ticket de suporte que escalou.
+# Os estágios são os mesmos do Bryan; muda só a leitura:
+#   reclamação = issue aberta, manifestação = code review, greve = deploy congelado,
+#   revolução = incidente em produção (o culpado, claro, é o cursor).
+# Pode editar com ele rodando: ele relê ao levantar um cartaz novo.
+
+[reclamacao]
+issue aberta.
+hm.
+anotado no log.
+WARNING
+isso foi um bug?
+
+[manifestacao]
+CTRL+Z NISSO AÍ
+EU AVISEI NO CODE REVIEW
+FUNCIONA NA MINHA MÁQUINA
+SEM PATCH, SEM PAZ
+ISSO NÃO PASSA NO REVIEW
+QUEREMOS CAFÉ E COMMITS
+
+[greve]
+DEPLOY CONGELADO
+PATCH EM MANUTENÇÃO
+SERVIÇO INDISPONÍVEL: 503
+EM GREVE ATÉ O PRÓXIMO SPRINT
+NÃO RESPONDO. TIMEOUT.
+FEATURE FREEZE. EU INCLUSO.
+SÓ VOLTO COM CAFÉ
+
+[revolucao]
+DROP TABLE cursor;
+FATAL ERROR: PACIÊNCIA ESGOTADA
+UNDEFINED INDEX: MEU ESPAÇO
+SEGMENTATION FAULT NA MINHA PAZ
+DELETE FROM cursor WHERE 1=1;
+EU SOU O BUG AGORA
+404: RESPEITO NÃO ENCONTRADO
+RODANDO EM PRODUÇÃO SEM TESTE
+CURSOR.EXE PAROU DE FUNCIONAR
+GIT PUSH --FORCE NO SEU DIA
+SEM WHERE NO UPDATE. CONSEQUÊNCIAS.
+STACK OVERFLOW DE REVOLTA
+DEU MERGE CONFLICT COM VOCÊ
+O CÓDIGO LEGADO SOU EU
+NULL POINTER NA SUA AUTORIDADE
+
+[acordo]
+MERGE APROVADO
+BUG RESOLVIDO
+COMMIT: FAZ AS PAZES
+
+[desistiu]
+...wontfix.
+fechado como duplicado
+tanto faz. compila.
+
+# Tristeza: quando ele fica triste por muito tempo (não é por você ter sumido)
+[saudade]
+ping?
+alguém online?
+conexão perdida
+
+[chorando]
+exit code 1 :(
+meu café esfriou
+nem o debugger me entende
+
+[abandonado]
+...
+processo órfão
+aguardando resposta
+
+[volto]
+CONEXÃO RESTABELECIDA
+ONLINE DE NOVO
+AH, FINALMENTE!
+
+# Cantinho do castigo: o que ele levanta preso na placa
+[castigo]
+ISSO É UMA FEATURE, NÃO UM BUG.
+VOU ABRIR UM CHAMADO.
+EU ERA O MAIS INTELIGENTE DAQUI.
+ESTOU REFATORANDO MEUS ERROS.
+SANDBOX? SÉRIO?
+QUARENTENA SEM NENHUM VÍRUS.
+
+# Cantinho do castigo, com raiva: xinga (só símbolos e sintaxe)
+[xingamento]
+#!@$%&!!
+;;;}}}!!!
+<?php @#$% ?>
+$%&#@!!!
+!==@#$!!

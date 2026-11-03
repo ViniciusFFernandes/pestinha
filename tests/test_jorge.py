@@ -37,7 +37,7 @@ def frases(pet_id):
 
 
 def test_jorge_existe_e_e_selecionavel():
-    assert config.list_pets(PATHS) == ["bryan", "jorge"]
+    assert config.list_pets(PATHS) == ["bryan", "jorge", "patch"]
     jorge = config.load_pet(PATHS, "jorge")
     assert jorge["nome"] == "Jorge" and jorge["seed"] != config.load_pet(PATHS, "bryan")["seed"]
     assert len(jorge["temperamento"]) >= 8                   # nenhum campo descartado por tipo errado

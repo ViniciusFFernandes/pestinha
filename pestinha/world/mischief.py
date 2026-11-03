@@ -33,6 +33,7 @@ class MischiefEngine(QObject):
         self.paths = conteudo                                 # ConteudoPaths: só o conteúdo deste pet e o comum
         self.notes = config.Notes(conteudo.notes)
         self.notes_sad = config.Notes(conteudo.notes_sad)       # bilhetes de quando ele está triste
+        self.frase_ia = lambda: None                            # post-it escrito pela IA agora (ia/fala.py), se houver
 
     # ---------------- agenda ----------------
 
@@ -95,7 +96,7 @@ class MischiefEngine(QObject):
             thing = ImageThing(path, MEME_MAX) if path else None
         else:
             notes = self.notes_sad if kind == "bilhete_triste" else self.notes
-            text = notes.pick()
+            text = (self.frase_ia() if kind != "bilhete_triste" else None) or notes.pick()
             thing = NoteThing(text, small=small) if text else None
         if thing is not None and not getattr(thing, "valida", True):
             thing.deleteLater()                      # imagem ilegível: nada de objeto invisível na tela

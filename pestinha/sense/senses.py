@@ -16,7 +16,9 @@ ACTIVITY_APPS = {
     "PROGRAMMING": {"code", "visual studio code", "devenv", "pycharm64", "pycharm", "xcode",
                     "claude", "codex", "cursor", "windsurf", "zed", "windowsterminal", "wt",
                     "idea64", "idea", "webstorm64", "rider64", "clion64", "goland64", "phpstorm64",
-                    "sublime_text", "notepad++"},
+                    "sublime_text", "notepad++",
+                    # PHP e banco de dados
+                    "phpstorm", "heidisql", "mysqlworkbench", "dbeaver", "navicat"},
     "DESIGNING": {"fusion360", "fusion"},
     "GAMING": {"valorant", "cs2", "csgo"},
     "BROWSING": {"chrome", "google chrome", "chromium", "firefox", "msedge", "microsoft edge", "opera",

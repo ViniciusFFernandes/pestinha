@@ -5,7 +5,8 @@ Cada motor empurra duas variáveis contínuas:
     valência  (-1 triste/bravo ... +1 feliz)
     ativação  (-1 calmo        ... +1 agitado)
 Elas seguem o cérebro com atraso (emotion_tau) e a emoção é lida do
-quadrante. Susto e drama são sobreposições curtas, disparadas por eventos.
+quadrante. Dentro do neutro, a combinação de motores dá nuances (pensando,
+sarcástico, sonolento). Susto e drama são sobreposições curtas, disparadas por eventos.
 """
 
 import math
@@ -28,6 +29,12 @@ NEUTRAL_WEIGHT = 2.0       # "massa" do neutro: pouca atividade = observando
 STARTLE_HZ = 7.0           # acima disso o susto passa na frente (troca de janela chega a ~13)
 STARTLE_SECONDS = 1.2
 
+# Nuances (ver refine): medidas na rede simulada, em regime
+PENSANDO_HZ = 6.0          # WATCH forte com humor neutro = concentrado (programando: ~8-10 Hz)
+SARCASMO_RAIVA_HZ = 4.0    # raiva e graça juntas = irritado, mas achando graça (sarcasmo)
+SARCASMO_GRACA_HZ = 3.0
+SONOLENTO_AROUSAL = -0.3   # neutro e com pouca energia (parado: ~-0.4), antes de dormir
+
 # Forma dos olhos por emoção (unidades em px no corpo de 120x90).
 #   w, h        tamanho do olho
 #   inner/outer quanto da pálpebra desce no lado de dentro/fora (fração de h)
@@ -43,6 +50,9 @@ EYE_SHAPES = {
     "assustado":  dict(w=26, h=50, inner=0.0, outer=0.0, smile=0.0, dy=-3.0),
     "dramatico":  dict(w=38, h=52, inner=0.0, outer=0.22, smile=0.0, dy=0.0),
     "dormindo":   dict(w=32, h=4, inner=0.0, outer=0.0, smile=0.0, dy=8.0),     # olhinhos fechados
+    "pensando":   dict(w=28, h=34, inner=0.0, outer=0.0, smile=0.0, dy=-4.0),   # olha para cima, de lado
+    "sarcastico": dict(w=33, h=36, inner=0.0, outer=0.0, smile=0.12, dy=0.0),   # um olho apertado, o outro erguido
+    "sonolento":  dict(w=32, h=20, inner=0.0, outer=0.1, smile=0.0, dy=5.0),    # pálpebras pesadas
 }
 
 
@@ -55,6 +65,24 @@ def classify(valence, arousal):
     if arousal > 0.22:
         return "curioso"
     return "observando"
+
+
+def refine(base, motor_activity, arousal):
+    """
+    Nuances que o quadrante sozinho não vê, lidas da combinação de motores:
+        sarcástico  raiva e graça ao mesmo tempo (dispensado, mas achando graça)
+        pensando    neutro e observando muito (concentrado, quando você programa)
+        sonolento   neutro e com pouca energia (antes de pegar no sono)
+    """
+    hz = motor_activity.get
+    if base in ("observando", "curioso", "bravo") and hz("ANGRY", 0.0) >= SARCASMO_RAIVA_HZ             and hz("CHEER", 0.0) >= SARCASMO_GRACA_HZ:
+        return "sarcastico"
+    if base == "observando":
+        if hz("WATCH", 0.0) >= PENSANDO_HZ:
+            return "pensando"
+        if arousal < SONOLENTO_AROUSAL:
+            return "sonolento"
+    return base
 
 
 # Árbitro: quando duas causas querem a cara ao mesmo tempo, vence a de maior prioridade.
@@ -123,7 +151,7 @@ class EmotionState:
             wanted = self.override
         else:
             self.override = None
-            wanted = classify(self.valence, self.arousal)
+            wanted = refine(classify(self.valence, self.arousal), motor_activity, self.arousal)
 
         if wanted != self.current and (
             now - self.since >= prof["emotion_dwell"] or wanted in ("assustado", "dramatico")

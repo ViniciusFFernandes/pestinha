@@ -74,7 +74,7 @@ class MischiefController:
             return None
         self.pedido_forcado = False
         # pet 'postit' prefere colar post-its quando pode
-        boost = 1.8 if emotion == "feliz" else 1.0     # feliz cola mais post-its
+        boost = {"feliz": 1.8, "sarcastico": 1.6}.get(emotion, 1.0)   # feliz e sarcástico colam mais post-its
         if self.postit_weight > 0 and random.random() < 0.5 * self.postit_weight * boost:
             for cand in (("bilhete_canto", "bilhete") if emotion == "bravo" else ("bilhete",)):
                 if cand in options:
