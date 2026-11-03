@@ -13,7 +13,7 @@ import time
 from dataclasses import dataclass, field
 
 from PySide6.QtCore import QPointF, QRectF, Qt
-from PySide6.QtGui import QColor, QFont, QPainterPath, QPen, QPolygonF
+from PySide6.QtGui import QColor, QFont, QLinearGradient, QPainterPath, QPen, QPolygonF
 
 from ..ajustes import ZZZ_PERIODO as ZZZ_PERIOD, ZZZ_QUANTIDADE as ZZZ_COUNT
 
@@ -123,6 +123,8 @@ def draw_face(p, shape, gaze=(0.0, 0.0), blink=1.0, emotion="observando", carinh
     p.drawRoundedRect(QRectF(-BODY_W / 2 + 11, -BODY_H / 2 + 11, BODY_W - 22, BODY_H - 22), 12, 12)
     if holo:
         _holo_varredura(p, holo, agora)
+        if "reflexo" in vestindo:                      # sentado no terminal: a luz da tela bate no rosto
+            _holo_reflexo(p, holo, agora)
     for nome, cor in acessorios:
         if nome == "gravata":                          # por cima da tela, sempre dentro do contorno do corpo
             _gravata(p, cor)
@@ -140,7 +142,7 @@ def draw_face(p, shape, gaze=(0.0, 0.0), blink=1.0, emotion="observando", carinh
             p.drawArc(QRectF(cx - 15, cy - 8, 30, 22), 0, 180 * 16)
         p.setPen(Qt.NoPen)
     else:
-        _olhos(p, shape, gaze, blink, emotion, a)
+        _olhos(p, shape, gaze, blink, emotion, a, olhando_tela="reflexo" in vestindo)
         if emotion == "pensando":
             _reticencias(p, a, agora)
     for nome, cor in acessorios:
@@ -161,9 +163,10 @@ def draw_face(p, shape, gaze=(0.0, 0.0), blink=1.0, emotion="observando", carinh
         p.restore()
 
 
-def _olhos(p, shape, gaze, blink, emotion, a):
+def _olhos(p, shape, gaze, blink, emotion, a, olhando_tela=False):
     """Desenha os dois olhos: forma, piscada, brilho e direção do olhar."""
-    gx, gy = (0.9, -1.0) if emotion == "pensando" else gaze    # pensando: olhar perdido, para cima
+    perdido = emotion == "pensando" and not olhando_tela        # pensando: olhar perdido, para cima
+    gx, gy = (0.9, -1.0) if perdido else gaze                  # (no notebook, olha para a tela)
     for side in (-1, 1):
         w = shape["w"]
         h = shape["h"] * blink
@@ -324,6 +327,23 @@ def _holo_fragmentos(p, cor, agora, a, frente):
         p.setBrush(luz)
         p.drawRect(QRectF(-lado / 2, -lado / 2, lado, lado))
         p.restore()
+    p.restore()
+
+
+def _holo_reflexo(p, cor, agora):
+    """Luz da tela do terminal subindo pela tela do rosto, de baixo para cima, piscando de leve."""
+    tela = QRectF(-BODY_W / 2 + 11, -BODY_H / 2 + 11, BODY_W - 22, BODY_H - 22)
+    luz = QLinearGradient(QPointF(0, tela.bottom()), QPointF(0, tela.top()))
+    forte = QColor(cor)
+    forte.setAlpha(int(80 + 15 * math.sin(agora * 3.1)))
+    fraca = QColor(cor)
+    fraca.setAlpha(0)
+    luz.setColorAt(0.0, forte)
+    luz.setColorAt(0.7, fraca)
+    p.save()
+    p.setPen(Qt.NoPen)
+    p.setBrush(luz)
+    p.drawRoundedRect(tela, 12, 12)
     p.restore()
 
 

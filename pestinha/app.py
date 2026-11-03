@@ -481,6 +481,8 @@ class PestinhaApp(SessaoMixin, InteracaoMixin, QObject):
         self.memory.tick(now, self.prof["episode_ok"], self.prof["episode_window"])
         st.emotion = emotion
         st.vestindo = self.figurino.tick(now, dt, self.activity, self.idle_seconds, emotion)
+        if self.mesa.sentado:
+            st.vestindo |= {"reflexo"}               # a luz da tela do notebook no rosto (só o holograma usa)
         if self.fala.ocupada:
             st.vestindo |= {"balao"}                 # digitando uma resposta para você
         elif self.perms["ia"] and self.perms["bilhetes"]:

@@ -58,3 +58,12 @@ def test_holograma_e_acessorios_desenham_em_todas_as_emocoes():
 def test_acessorio_desconhecido_e_ignorado():
     a = aparencia_de({"acessorios": {"holograma": "azul", "jetpack": "#ffffff"}})
     assert [n for n, _ in a.acessorios] == ["holograma"]          # cor inválida cai no padrão
+
+
+def test_patch_tem_memes_proprios_em_todas_as_emocoes():
+    """Gerados por ferramentas/gerar_memes_patch.py: um por emoção, no mínimo, e os de trabalho."""
+    memes = PATHS.conteudo("patch").memes
+    for emocao in ("feliz", "contente", "curioso", "bravo", "triste", "pensando", "sarcastico", "sonolento"):
+        imagens = config.list_images(memes / emocao)
+        assert imagens and not QImage(str(imagens[0])).isNull(), emocao
+    assert len(config.list_images(PATHS.conteudo("patch").memes_trabalho)) >= 5
